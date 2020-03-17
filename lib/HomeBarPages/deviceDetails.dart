@@ -4,8 +4,6 @@ import 'package:test_app1/model/devices.dart';
 class DeviceDetails extends StatelessWidget {
   final DeviceList device;
 
-  //DeviceDetails();
-
   const DeviceDetails({Key key, this.device}) : super(key: key);
 
   @override
