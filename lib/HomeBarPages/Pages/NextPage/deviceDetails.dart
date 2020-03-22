@@ -1,15 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:test_app1/model/cloudDevicesModel.dart';
+import 'package:test_app1/model/devices.dart';
 
-class CloudDeviceDetails extends StatelessWidget {
-  final DevicefromCloud device;
+class DeviceDetails extends StatefulWidget {
+  //final DeviceList device;
+  final DocumentSnapshot getDevice;
 
-  const CloudDeviceDetails({Key key, this.device}) : super(key: key);
+  //DeviceDetails({Key key, this.device}) : super(key: key);
+  DeviceDetails({this.getDevice});
+
+  @override
+  _DeviceDetailsState createState() => _DeviceDetailsState();
+}
+
+class _DeviceDetailsState extends State<DeviceDetails> {
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
-        title: Text("The Cloud"),
+        title: Text("Device Details"),
         backgroundColor: Colors.green,
       ),
       body: new Container(
@@ -17,17 +27,24 @@ class CloudDeviceDetails extends StatelessWidget {
           child: new Column(
             children: <Widget>[
               new IconButton(
-                icon: new Icon(Icons.cloud, color: Colors.green),
+                icon: new Icon(Icons.adb, color: Colors.green),
                 iconSize: 60,
                 onPressed: () {
                   Navigator.of(context).pushNamed("/");
                 },
               ),
               new Text(
-                device.applianceType,
+                widget.getDevice.data['deviceName'],
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
+                  color: Colors.grey,
+                ),
+              ),
+              new Text(
+                "ID: " + widget.getDevice.data['deviceId'].toString(),
+                style: TextStyle(
+                  fontSize: 15,
                   color: Colors.grey,
                 ),
               ),
@@ -42,34 +59,67 @@ class CloudDeviceDetails extends StatelessWidget {
                       ),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                      
                     ),
                     ListTile(
                       title: Text("Status"),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 0),
                       trailing: Text(
-                        "${device.state.toString()}",
+                        widget.getDevice.data["status"],
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                     ),
                     ListTile(
-                      title: Text("Energy Consumption"),
+                      title: Text("Voltage"),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-                      trailing: Text("${device.power.toString()} W"),
+                      trailing: Text(
+                        widget.getDevice.data["voltage"] + " V",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text("Current"),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                      trailing: Text(
+                        widget.getDevice.data["current"] + " A",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text("Power"),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                      trailing: Text(
+                        widget.getDevice.data["power"] + " W",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     ListTile(
                       title: Text("Energy Savings"),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-                      trailing: Text("${device.energySavings.toString()} W"),
+                      trailing: Text(
+                        widget.getDevice.data["energySavings"] + " W",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     ListTile(
-                      title: Text("CO2e saved"),
+                      title: Text("Trees saved"),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-                      trailing: Text("${device.treesSaved.toString()} CO2e"),
+                          trailing: Text(
+                        widget.getDevice.data["treesSaved"],
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     ListTile(
                       title: Text(
@@ -79,7 +129,7 @@ class CloudDeviceDetails extends StatelessWidget {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 0),
                       trailing: Text(
-                        r"$ " + device.dollarSavings.toString(),
+                        r"$ " + widget.getDevice.data["totalSavings"],
                         style: TextStyle(
                             color: Colors.green, fontWeight: FontWeight.bold),
                       ),

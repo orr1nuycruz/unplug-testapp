@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:test_app1/HomeBarPages/Navigation.dart';
-import 'HomeBarPages/Pages/DeviceFromCloud.dart';
 
 void main() {
   runApp(
     new MaterialApp(
       home: Homepage(),
       routes: <String, WidgetBuilder>{
-        "/SecondPage": (BuildContext context) => new SecondPage(),
-        "/CloudDevice": (BuildContext context) => new DevicesFromCloud(),
+        "/SecondPage": (BuildContext context) => new SecondPage()
       },
     ),
   );

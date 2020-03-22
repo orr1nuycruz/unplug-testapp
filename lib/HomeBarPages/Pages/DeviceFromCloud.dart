@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
-import 'package:test_app1/HomeBarPages/cloudDetails.dart';
 import 'package:test_app1/model/cloudDevicesModel.dart';
+import 'NextPage/cloudDetails.dart';
 
 class DevicesFromCloud extends StatefulWidget {
   @override
@@ -41,54 +41,6 @@ class _DevicesFromCloudState extends State<DevicesFromCloud> {
     });
   }
 
-  Widget deviceCard(DevicefromCloud device, BuildContext context) {
-    return InkWell(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 120.0,
-        child: Card(
-          color: Colors.black45,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 8.0,
-              bottom: 8.0,
-              left: 40.0,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Text(
-                      device.applianceType,
-                      style: TextStyle(color: Colors.amber[50]),
-                    ),
-                    Text("Power: ${device.power} W",
-                        style: TextStyle(color: Colors.amber[50])),
-                  ],
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //   children: <Widget>[
-                //     Text("Released: ${movie.released}",
-                //         style: TextStyle(color: Colors.amber[50])),
-                //     Text(movie.runtime,
-                //         style: TextStyle(color: Colors.amber[50])),
-                //     Text(movie.rated,
-                //         style: TextStyle(color: Colors.amber[50])),
-                //   ],
-                // ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      onTap: () => debugPrint(device.state),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +72,6 @@ class _DevicesFromCloudState extends State<DevicesFromCloud> {
                 child: ListView.builder(
                   itemCount: newList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    //return deviceCard(newList[index], context);
                     return InkWell(
                       child: Container(
                         width: MediaQuery.of(context).size.width,
