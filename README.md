@@ -1,16 +1,19 @@
-# test_app1
+# UnplugTestApp
 
-A new Flutter project.
+Upcoming Application for the Unplug Company.
 
-## Getting Started
+## Before downloading this project
+This application is made entirely on FLutter and Dart. 
+Please follow this video in order to test this application
+https://www.youtube.com/watch?v=5izFFbdHnWY
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Note when cloning
+After cloning this project on Visual Studio Code, 
+which you eventually downloaded it after watching the video,
+type 'flutter pub get' on the VScode terminal to get all the
+packages used. It will get rid of the errors that showed when you first
+open it on VSCode.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
