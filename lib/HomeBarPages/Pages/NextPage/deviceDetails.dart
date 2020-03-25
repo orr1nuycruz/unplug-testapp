@@ -152,7 +152,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Turn off device betwwen these times?\n\n" +
+          title: Text("Turn off device between these times?\n\n" +
               "Start Time: " +
               formatTimeOfDay(startTime) +
               "\n"
