@@ -34,10 +34,6 @@ class _BottomNavigatorPageState extends State<BottomNavigatorPage> {
             icon: Icon(Icons.cloud),
             title: Text('Get Devices'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
-          ),
         ],
         onTap: SelectPage,
         currentIndex: _currentIndex,

@@ -19,12 +19,26 @@ class _HomeDevicesState extends State<HomeDevices> {
     return qn.documents;
   }
 
-  getDetails(DocumentSnapshot item){
-    Navigator.push(context, MaterialPageRoute( builder: (context) => DeviceDetails(getDevice : item)));
+  void updateDeviceState(AsyncSnapshot<dynamic> doc) async {
+    await db
+        .collection('Devices Available')
+        .document(doc.data['documentID'])
+        .updateData({'status': 'off'});
+    Navigator.pop(context);
+  }
+
+  getDetails(DocumentSnapshot item) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DeviceDetails(getDevice: item)));
   }
 
   Widget build(BuildContext context) {
     // TODO: implement build
+    TimeOfDay getStartTime;
+    TimeOfDay getEndTime;
+    TimeOfDay todaysTime;
 
     return new Scaffold(
       appBar: new AppBar(
@@ -62,7 +76,7 @@ class _HomeDevicesState extends State<HomeDevices> {
                             itemBuilder: (BuildContext _, int index) {
                               Icon icon;
                               if (snapshot.data[index].data['status'] == 'on') {
-                                icon = new Icon(Icons.done_outline,
+                                icon = new Icon(Icons.power_settings_new,
                                     color: Colors.green, size: 50);
                               } else if (snapshot.data[index].data['status'] ==
                                   'off') {
@@ -70,8 +84,8 @@ class _HomeDevicesState extends State<HomeDevices> {
                                     color: Colors.red, size: 50);
                               } else if (snapshot.data[index].data['status'] ==
                                   'standby') {
-                                icon = new Icon(Icons.power,
-                                    color: Colors.yellow, size: 50);
+                                icon = new Icon(Icons.power_settings_new,
+                                    color: Colors.yellowAccent, size: 50);
                               }
                               return Card(
                                 elevation: 5,
@@ -90,16 +104,19 @@ class _HomeDevicesState extends State<HomeDevices> {
                                         fontSize: 20),
                                   ),
                                   subtitle: Text(
-                                    snapshot.data[index].data['power'],
+                                    snapshot.data[index].data['power'] +
+                                        " W (" +
+                                        snapshot.data[index].data['status'] +
+                                        ")",
                                     style: TextStyle(fontSize: 15),
                                   ),
-                                  onTap: ()=> getDetails(snapshot.data[index]),
+                                  onTap: () => getDetails(snapshot.data[index]),
                                 ),
                               );
                             });
                       }
                     }),
-              )
+              ),
 
               // new Expanded(
               //   child: ListView.builder(

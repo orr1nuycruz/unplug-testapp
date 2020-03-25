@@ -24,117 +24,124 @@ class _CloudDeviceDetailsState extends State<CloudDeviceDetails> {
 
   void showMessage() {
     Fluttertoast.showToast(
-        msg: "HEllo nigga",
+        msg: "Added Device to your List",
         gravity: ToastGravity.CENTER,
-        toastLength: Toast.LENGTH_LONG,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
+        toastLength: Toast.LENGTH_SHORT,
+        backgroundColor: Colors.red[50],
+        textColor: Colors.black12,
+        fontSize: 22.0);
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
-    
     return loading
         ? Loading()
         : new Scaffold(
-              appBar: new AppBar(
-                title: Text("The Cloud"),
-                backgroundColor: Colors.green,
-              ),
-              body: new Container(
-                child: Center(
-                  child: new Column(
-                    children: <Widget>[
-                      new IconButton(
-                        icon: new Icon(Icons.cloud, color: Colors.green),
-                        iconSize: 60,
+            appBar: new AppBar(
+              title: Text("From the Cloud"),
+              backgroundColor: Colors.green,
+            ),
+            body: new Container(
+              child: Center(
+                child: new Column(
+                  children: <Widget>[
+                    new IconButton(
+                      icon: new Icon(Icons.cloud, color: Colors.green),
+                      iconSize: 60,
+                      onPressed: () {
+                        Navigator.of(context).pushNamed("/");
+                      },
+                    ),
+                    new Text(
+                      widget.device.applianceType,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    new Expanded(
+                      child: ListView(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              "Statistics",
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 0),
+                          ),
+                          ListTile(
+                            title: Text("Status"),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 0),
+                            trailing: Text(
+                              "${widget.device.state.toString()}",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text("Energy Consumption"),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 0),
+                            trailing:
+                                Text("${widget.device.power.toString()} W"),
+                          ),
+                          ListTile(
+                            title: Text("Energy Savings"),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 0),
+                            trailing: Text(
+                                "${widget.device.energySavings.toString()} W"),
+                          ),
+                          ListTile(
+                            title: Text("Trees saved"),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 0),
+                            trailing:
+                                Text("${widget.device.treesSaved.toString()}"),
+                          ),
+                          ListTile(
+                            title: Text(
+                              "Total Savings",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 0),
+                            trailing: Text(
+                              r"$ " + widget.device.dollarSavings.toString(),
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Padding(
+                      padding: EdgeInsets.all(15),
+                      child: new RaisedButton.icon(
+                        icon: new Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                        color: Colors.green,
+                        label: new Text('Add Device',
+                            style: TextStyle(color: Colors.white)),
                         onPressed: () {
-                          Navigator.of(context).pushNamed("/");
+                          createData();
+                          showMessage();
+                          Navigator.pop(context, true);
                         },
                       ),
-                      new Text(
-                        widget.device.applianceType,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      new Expanded(
-                        child: ListView(
-                          children: [
-                            ListTile(
-                              title: Text(
-                                "Statistics",
-                                style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.bold),
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 0),
-                            ),
-                            ListTile(
-                              title: Text("Status"),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 0),
-                              trailing: Text(
-                                "${widget.device.state.toString()}",
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            ListTile(
-                              title: Text("Energy Consumption"),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 0),
-                              trailing:
-                                  Text("${widget.device.power.toString()} W"),
-                            ),
-                            ListTile(
-                              title: Text("Energy Savings"),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 0),
-                              trailing: Text(
-                                  "${widget.device.energySavings.toString()} W"),
-                            ),
-                            ListTile(
-                              title: Text("CO2e saved"),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 0),
-                              trailing: Text(
-                                  "${widget.device.treesSaved.toString()} CO2e"),
-                            ),
-                            ListTile(
-                              title: Text(
-                                "Total Savings",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 0),
-                              trailing: Text(
-                                r"$ " + widget.device.dollarSavings.toString(),
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      new RaisedButton(
-                          child: new Text('Add Device'),
-                          onPressed: () {
-                            createData();
-                            showMessage();
-                            Navigator.pop(context, true);
-                          }),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
-            );
+            ),
+          );
   }
 
   void createData() async {
@@ -150,6 +157,8 @@ class _CloudDeviceDetailsState extends State<CloudDeviceDetails> {
       'energySavings': widget.device.energySavings,
       'totalSavings': widget.device.dollarSavings,
       'treesSaved': widget.device.treesSaved,
+      'startTime': 'N/A',
+      'endTime': 'N/A',
     });
   }
 }

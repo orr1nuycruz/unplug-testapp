@@ -16,7 +16,7 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new Scaffold(
+    return Scaffold(
       appBar: new AppBar(
         title: new Text("Home Devices"),
         backgroundColor: Colors.green,
@@ -27,13 +27,13 @@ class Homepage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new IconButton(
-                icon: new Icon(Icons.favorite, color: Colors.greenAccent),
-                iconSize: 60,
+                icon: new Icon(Icons.desktop_windows, color: Colors.greenAccent),
+                iconSize: 80,
                 onPressed: () {
                   Navigator.of(context).pushNamed("/SecondPage");
                 },
               ),
-              new Text("Home")
+              new Text("Press on Icon to Continue")
             ],
           ),
         ),
