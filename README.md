@@ -3,7 +3,7 @@
 Upcoming Application for the Unplug Company.
 
 ## Before downloading this project
-This application is made entirely on FLutter and Dart. 
+This application is made entirely on Flutter and Dart. 
 Please follow this video in order to test this application
 https://www.youtube.com/watch?v=5izFFbdHnWY
 
